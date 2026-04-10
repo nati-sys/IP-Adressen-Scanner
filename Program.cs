@@ -16,3 +16,14 @@ Console.WriteLine("\nScanne...\n");
 var aktiveIPs = scanner.ScanRange(baseIp, start, end);
 
 Console.WriteLine($"\nFertig! {aktiveIPs.Count} Gerät(e) gefunden.");
+
+Console.WriteLine("\nMöchtest du auch Ports scannen? (j/n)");
+if (Console.ReadLine()?.ToLower() == "j")
+{
+    PortChecker checker = new PortChecker();
+    foreach (string ip in aktiveIPs)
+    {
+        Console.WriteLine($"\nPorts für {ip}:");
+        checker.ScanPorts(ip);
+    }
+}
