@@ -7,6 +7,8 @@ namespace IP_Adressen_Scanner
 {
     public class PortChecker
     {
+        private readonly int[] _defaultPorts = { 22, 80, 443, 3389, 8080 };
+
         public bool IsPortOpen(string ip, int port)
         {
             try
@@ -21,6 +23,21 @@ namespace IP_Adressen_Scanner
             {
                 return false;
             }
+        }
+
+        public List<int> ScanPorts(string ip)
+        {
+            List<int> openPorts = new List<int>();
+
+            foreach (int port in _defaultPorts)
+            {
+                if (IsPortOpen(ip, port))
+                {
+                    Console.WriteLine($"  Port {port}: OFFEN");
+                    openPorts.Add(port);
+                }
+            }
+            return openPorts;
         }
     }
 }
