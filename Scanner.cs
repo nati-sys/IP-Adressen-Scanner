@@ -20,5 +20,21 @@ namespace IP_Adressen_Scanner
                 return false;
             }
         }
+
+        public List<string> ScanRange(string baseIp, int start, int end)
+        {
+            List<string> activeHosts = new List<string>();
+
+            for (int i = start; i <= end; i++)
+            {
+                string ip = $"{baseIp}.{i}";
+                if (PingHost(ip))
+                {
+                    Console.WriteLine($"[+] Aktiv: {ip}");
+                    activeHosts.Add(ip);
+                }
+            }
+            return activeHosts;
+        }
     }
 }
